@@ -29,8 +29,9 @@ public class MainSudoku {
 		System.out.println("The Initial Sudoku Puzzles: ");
 		displayBoard(board);
 		
+		System.out.println("Shuto");
+		
 	}
-	
 	
 	//Method to print out the sudoku puzzles
 	public static void displayBoard(int[][] board) {
