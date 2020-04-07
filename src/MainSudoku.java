@@ -2,6 +2,9 @@ import java.util.*;
 import java.io.*;
 
 public class MainSudoku {
+	public static final int EMPTY = 0;
+	public static final int SIZE = 9;
+	
 	public static void main(String[] args) {
 		System.out.println( "Please enter a file name: " );
 		Scanner input = new Scanner(System.in);
@@ -28,6 +31,7 @@ public class MainSudoku {
 		//Show the initial Sudoku puzzles board
 		System.out.println("The Initial Sudoku Puzzles: ");
 		displayBoard(board);
+		System.out.println(isInRow(8,9,board));
 		
 	}
 	
@@ -44,7 +48,30 @@ public class MainSudoku {
 			}
 			System.out.println(); 
 		}
-		System.out.print("-------------------");
+		System.out.println("-------------------");
 	}
 
+	
+	//Method to check if a number is already in a row
+	public static boolean isInRow(int row, int number, int[][] board) {
+		for(int i = 0; i < SIZE; i++) {
+			if(board[row][i] == number)
+				return true;
+		}
+		return false;
+	}
+	
+	//Method to check if a number is already in a columnn
+	public static boolean isInCol(int col, int number, int[][] board) {
+		for(int i = 0; i < SIZE; i++) {
+			if(board[i][col] == number)
+				return true;
+		}
+		return false;
+	}
+	
+	//Method to check if a number is already in a 3x3 grid
+	public static boolean isInSmallGrid (int row, int col, int number, int[][] board) {
+		return true;
+	}
 }
