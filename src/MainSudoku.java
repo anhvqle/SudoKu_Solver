@@ -31,7 +31,7 @@ public class MainSudoku {
 		//Show the initial Sudoku puzzles board
 		System.out.println("The Initial Sudoku Puzzles: ");
 		displayBoard(board);
-		System.out.println(isInRow(8,9,board));
+		System.out.println(isInSmallGrid(6,7,9,board));
 		
 	}
 	
@@ -70,8 +70,16 @@ public class MainSudoku {
 		return false;
 	}
 	
-	//Method to check if a number is already in a 3x3 grid
+	//Method to check if a number is already in a 3x3 grid of a specific row and column
 	public static boolean isInSmallGrid (int row, int col, int number, int[][] board) {
-		return true;
+		int r = row - row%3;
+		int c = col - col%3;
+		for (int i = r; i < r+3; i++) {
+			for (int j = c; j < c+3; j++) {
+				if (board[i][j] == number)
+					return true;
+			}
+		}
+		return false;
 	}
 }
