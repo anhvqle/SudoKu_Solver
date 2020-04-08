@@ -31,8 +31,15 @@ public class MainSudoku {
 		//Show the initial Sudoku puzzles board
 		System.out.println("The Initial Sudoku Puzzles: ");
 		displayBoard(board);
-		System.out.println(isGoodToPlace(7,7,9,board));
+		System.out.println("\n");
 		
+		if(solve(board)) {
+			System.out.println("Solution for the above Sudoku puzzles");
+			displayBoard(board);
+		}
+		else
+			System.out.println("Unable to solve the Sudoku puzzles");
+		reader.close();
 	}
 	
 	// Method to print out the sudoku puzzles
@@ -83,9 +90,30 @@ public class MainSudoku {
 	}
 
 	// Method to check if a number is good to be in a specific position. 
-	// Returns true if the row, column, and 3x3 grid the nnumber is in does not already have that number
+	// Returns true if the row, column, and 3x3 grid the number is in does not already have that number
 	public static boolean isGoodToPlace (int row, int col, int number, int[][] board) {
 		return !isInRow(row, number, board) && !isInCol(col, number, board) && !isInSmallGrid(row, col, number, board);
+	}
+		
+	// Method to solve the Sudoku puzzles
+	public static boolean solve(int[][] board) {
+		for (int row = 0; row < SIZE; row++) {
+			for (int col = 0; col < SIZE; col++) {
+				if(board[row][col] == EMPTY) {
+					for(int number = 1; number <= 9; number++) {
+						if(isGoodToPlace(row, col, number, board)) {
+							board[row][col] = number;
+							if(solve(board))  //Calling solve on the new board with added number
+								return true;
+							else
+								board[row][col] = EMPTY; // Reset the last position to 0 because it is not a solution
+						}
+					}
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
