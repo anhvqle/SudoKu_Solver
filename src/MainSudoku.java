@@ -31,11 +31,11 @@ public class MainSudoku {
 		//Show the initial Sudoku puzzles board
 		System.out.println("The Initial Sudoku Puzzles: ");
 		displayBoard(board);
-		System.out.println(isInSmallGrid(6,7,9,board));
+		System.out.println(isGoodToPlace(7,7,9,board));
 		
 	}
 	
-	//Method to print out the sudoku puzzles
+	// Method to print out the sudoku puzzles
 	public static void displayBoard(int[][] board) {
 		System.out.println("-------------------");
 		for (int i = 0; i < 9; i++) {
@@ -51,8 +51,7 @@ public class MainSudoku {
 		System.out.println("-------------------");
 	}
 
-	
-	//Method to check if a number is already in a row
+	// Method to check if a number is already in a row
 	public static boolean isInRow(int row, int number, int[][] board) {
 		for(int i = 0; i < SIZE; i++) {
 			if(board[row][i] == number)
@@ -61,7 +60,7 @@ public class MainSudoku {
 		return false;
 	}
 	
-	//Method to check if a number is already in a columnn
+	// Method to check if a number is already in a columnn
 	public static boolean isInCol(int col, int number, int[][] board) {
 		for(int i = 0; i < SIZE; i++) {
 			if(board[i][col] == number)
@@ -70,7 +69,7 @@ public class MainSudoku {
 		return false;
 	}
 	
-	//Method to check if a number is already in a 3x3 grid of a specific row and column
+	// Method to check if a number is already in a 3x3 grid of a specific row and column
 	public static boolean isInSmallGrid (int row, int col, int number, int[][] board) {
 		int r = row - row%3;
 		int c = col - col%3;
@@ -82,4 +81,12 @@ public class MainSudoku {
 		}
 		return false;
 	}
+
+	// Method to check if a number is good to be in a specific position. 
+	// Returns true if the row, column, and 3x3 grid the nnumber is in does not already have that number
+	public static boolean isGoodToPlace (int row, int col, int number, int[][] board) {
+		return !isInRow(row, number, board) && !isInCol(col, number, board) && !isInSmallGrid(row, col, number, board);
+	}
+	
 }
+
